@@ -1,0 +1,238 @@
+.page {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%; /* ovo je širina */
+}
+* {
+    padding: 0;
+    margin: 0;
+}
+html, body {
+	background-attachment: fixed;
+	background-image: url(../media/bg.png);
+}
+.default {
+    padding: 5px;
+    margin: 5px;
+}
+.header {
+    background: antiquewhite; /*ovo je boja onog headera, sad je ovo kao beš */
+    position: relative;
+}
+
+.header-logo > i {
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    border: 1.5em solid transparent;
+    border-radius: 1.5em;
+    border-left: 1.5em solid #eb008c;
+    border-right: 1.5em solid #eb008c;
+    left: 0em;
+    top: 0em;
+}
+.header-logo > i+i {
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    border: 1.5em solid #a60f62;
+    border-bottom: 1.5em solid #a60f62;
+    left: 0em;
+    top: 1.4em;
+}
+.header-logo > i+i+i {
+    position: absolute;
+    display: inline-block;
+    width: 0.34em;
+    height: 3em;
+    background-color: #ff1da4;
+    left: 1.3em;
+    top: 1.4em;
+}
+.header-logo > i+i+i+i {
+    position: absolute;
+    display: inline-block;
+    width: 3em;
+    height: 0.25em;
+    background-color: #ff1da4;
+    left: 0em;
+    top: 2.6em;
+}
+
+.header-logo {
+	position: relative;
+
+}
+.header-logo-cnt {
+    display: inline-block;
+}
+.slika {
+	
+    margin-left: auto;
+	margin-right: auto;
+	display: block;
+	
+}
+.header-menu {
+    display: inline-block;
+
+    min-height: 50px; /* ovo je visina onog headera, u zavisnostii od logoa... */
+}
+.header-menu ul {
+    position: absolute;
+    bottom: 0;
+}
+.header-menu ul, .header-menu ul li {
+    display: inline-block;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+.header-menu ul li a {
+    text-decoration: none;
+    width: 100%;
+    display: block;
+    padding: 10px 0 10px 0;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+}
+.header-menu > ul > li {
+    height: 40px;
+    float: left;
+    background: blueviolet; 
+    width: 140px;
+    margin: 0;
+    padding: 0;
+}
+.header-menu ul li:hover {
+    background: darkviolet; 
+}
+.empty {
+    padding: 0;
+    margin: 0;
+    clear: both;
+}
+.main {
+    min-height: 400px;
+    background: cadetblue; 
+}
+.div-news {
+    padding: 20px;
+
+}
+.news {
+    margin: 10px 10px 15px 10px;
+    padding: 5px;
+    display: block;
+    background: #6dbabc; 
+
+}
+.news-content {
+    float: left; 
+}
+.news-title {
+    font-weight: bold;
+    font-size: larger;
+}
+.news-img {
+    display: inline-block;
+    min-width: 40px;
+    min-height: 60px;
+    margin: 10px;
+    background-image: url(../media/medo.jpg); 
+	background-size: 40px 60px;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+.news-txt {
+    display: inline;
+}
+.links {
+    padding: 10px;
+
+}
+
+.links ul {
+    padding-top: 10px;
+    padding-left: 25px;
+    list-style: none;
+}
+.links ul li {
+    margin: 0;
+}
+.links ul li a:hover {
+    background: url(../media/gift-dot.png) no-repeat left center; 
+    padding: 3px 0 5px 20px;
+    list-style: none;
+    margin: 0;
+}
+#forma {
+    border-radius: 10px; /* ovo je zaobljenje one forme */
+    background: #3b6567;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+    height: 400px;
+}
+#forma div#lijevo {
+    float: left;
+    font-weight: bold;
+    color: white;
+    padding-left: 10px;
+    width: 30%;
+}
+#forma div#desno {
+    float: left;
+    width: 65%;
+
+}
+#forma .span-req {
+    font-weight: lighter;
+    color: yellow; 
+    font-size: smaller;
+}
+#komentar {
+    width: 95%;
+    min-height: 150px;
+}
+#forma div p {
+    margin-top: 15px;
+}
+.desno-cont {
+    margin-top: 10px;
+}
+#lijevo-dugmad {
+    margin-right: 5%;
+    margin-top: 20px;
+    text-align: right;
+}
+#forma * {
+    font-size: 16px;
+}
+#forma div div .input-el {
+    font-size: 19px;
+    width: 250px;
+}
+#forma .dugme {
+    width: 110px;
+}
+#tabela {
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    
+}
+#tabela tr { /* ovdje æemo stilirati onu tabelu kad je popunimo... */
+
+}
+#tabela td {
+    padding: 5px;
+    border: 1px solid black;
+}

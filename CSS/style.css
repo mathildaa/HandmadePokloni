@@ -1,7 +1,7 @@
 .page {
     margin-left: auto;
     margin-right: auto;
-    width: 80%; /* ovo je širina */
+    width: 80%; /* ovo je ?irina */
 }
 * {
     padding: 0;
@@ -16,31 +16,43 @@ html, body {
     margin: 5px;
 }
 .header {
-    background: antiquewhite; /*ovo je boja onog headera, sad je ovo kao beš */
+    background: antiquewhite; /*ovo je boja onog headera, sad je ovo kao be? */
     position: relative;
 }
 
-.header-logo > i {
-    position: absolute;
-    display: inline-block;
-    width: 0;
-    height: 0;
-    line-height: 0;
-    border: 1.5em solid transparent;
-    border-radius: 1.5em;
-    border-left: 1.5em solid #eb008c;
-    border-right: 1.5em solid #eb008c;
-    left: 0em;
-    top: 0em;
-}
 .header-logo > i+i {
     position: absolute;
     display: inline-block;
     width: 0;
     height: 0;
     line-height: 0;
-    border: 1.5em solid #a60f62;
-    border-bottom: 1.5em solid #a60f62;
+    border: 1.5em solid #1142AA;
+    border-bottom: 1.5em solid #1142AA;
+    left: 0em;
+    top: 1.4em;
+}
+.header-logo>i{
+
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    border: 1.5em solid transparent;
+    border-radius: 0.5em;
+    border-left: 1.5em solid #eb008c;
+    border-right: 1.5em solid #eb008c;
+    left: 0em;
+    top: 0em;
+}
+.header-logo > i+i+i {
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    border:0em solid #a60f62;
+    border-bottom: 0em solid #a60f62;
     left: 0em;
     top: 1.4em;
 }
@@ -229,7 +241,7 @@ html, body {
     margin-left: auto;
     
 }
-#tabela tr { /* ovdje æemo stilirati onu tabelu kad je popunimo... */
+#tabela tr { /* ovdje ?emo stilirati onu tabelu kad je popunimo... */
 
 }
 #tabela td {

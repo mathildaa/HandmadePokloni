@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/kontaktstyle.css">
+	<script src="kontaktscript.js"></script>
     <title>Handmade pokloni | Kontakt</title>
 </head>
 <body>
@@ -14,7 +15,6 @@
                 <li><a class="menu-links" href="linkovi.html">LINKOVI</a></li>
                 <li><a class="menu-links" href="tabela.html">Tabela</a></li>
                 <li><a class="menu-contacts" href="kontakt.html">KONTAKT</a></li>
-				<li><a class="menu-pretraga" href="pretraga.html">PRETRAGA</a></li>
             </ul>
         </div>
 
@@ -24,7 +24,7 @@
 		</div>
 	</div>
     <div class="main">
-        <form id="forma" method="post" action="kontakt.php">
+        <form id="forma" method="post">
             <div id="lijevo">
                 <p>Ime <span class="span-req">*</span></p>
                 <p>E-mail <span class="span-req">*</span></p>
@@ -34,16 +34,16 @@
             </div>
             <div id="desno">
                 <div class="desno-cont">
-                    <input type="text" name="ime" autofocus required class="input-el">
+                    <input type="text" name="ime" onkeypress="validate(this)" onfocusout="validate(this)"   autofocus required class="input-el">
                 </div>
                 <div class="desno-cont">
-                    <input type="email" name="email" required class="input-el">
+                    <input type="email" id = "email" name="email" onkeypress="validate(this)" onfocusout="validate(this)" required class="input-el">
                 </div>
                 <div class="desno-cont">
-                    <input type="url" name="url" class="input-el">
+                    <input type="url" id = "url" onkeypress="validate(this)" onfocusout="validate(this)" name="url" class="input-el">
                 </div>
 				<div class="desno-cont">
-                    <input type="tel" name="tel" class="input-el">
+                    <input type="tel" name="tel" onkeypress="validate(this)" onfocusout="validate(this)"  id = "tel" class="input-el">
                 </div>
                 <div class="desno-cont">
                     <textarea name="comment" id="komentar"></textarea>

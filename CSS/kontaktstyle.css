@@ -1,0 +1,142 @@
+.page {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%; /* ovo je ?irina */
+}
+* {
+    padding: 0;
+    margin: 0;
+}
+html, body {
+	background-attachment: fixed;
+	background-image: url(../media/bg.png);
+}
+.default {
+    padding: 5px;
+    margin: 5px;
+}
+.header {
+    background: cadetblue; /*ovo je boja onog headera, sad je ovo kao be? */
+    position: relative;
+}
+
+.cover{
+	display: block;
+	position:relative;
+	background-repeat: no-repeat;
+	height:200px;
+	background-position: center;
+	background-image:url(../media/hm.jpg);
+}
+
+.centar {
+  letter-spacing: -1px;
+  rgba(0,0,0,0.1);
+  padding: 20px;
+  text-align: center
+}
+
+.slika {
+	
+    margin-left: auto;
+	margin-right: auto;
+	display: block;
+	
+}
+.header-menu {
+    display: inline-block;
+	position: relative;
+    min-height: 10px; /* ovo je visina onog headera, u zavisnostii od logoa... */
+}
+.header-menu ul {
+    position: absolute;
+    bottom: 0;
+}
+.header-menu ul, .header-menu ul li {
+    display: inline-block;
+    position:relative;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+.header-menu ul li a {
+    text-decoration: none;
+    width: 100%;
+    display: block;
+    padding: 10px 0 10px 0;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+}
+.header-menu > ul > li {
+    height: 40px;
+    float: left;
+    background: #6dbabc; 
+    width: 140px;
+    margin: 0;
+    padding: 0;
+}
+.header-menu ul li:hover {
+    background: cadetblue; 
+}
+.empty {
+    padding: 0;
+    margin: 0;
+    clear: both;
+}
+.main {
+    min-height: 400px;
+    background: cadetblue; 
+}
+#forma {
+    border-radius: 10px; /* ovo je zaobljenje one forme */
+    background: #3b6567;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+    height: 400px;
+}
+#forma div#lijevo {
+    float: left;
+    font-weight: bold;
+    color: white;
+    padding-left: 10px;
+    width: 30%;
+}
+#forma div#desno {
+    float: left;
+    width: 65%;
+
+}
+#forma .span-req {
+    font-weight: lighter;
+    color: grey; 
+    font-size: smaller;
+}
+#komentar {
+    width: 95%;
+    min-height: 150px;
+}
+#forma div p {
+    margin-top: 15px;
+}
+.desno-cont {
+    margin-top: 10px;
+}
+#lijevo-dugmad {
+    margin-right: 5%;
+    margin-top: 20px;
+    text-align: right;
+}
+#forma * {
+    font-size: 16px;
+}
+#forma div div .input-el {
+    font-size: 19px;
+    width: 250px;
+}
+#forma .dugme {
+    width: 110px;
+}
+

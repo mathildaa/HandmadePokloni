@@ -16,8 +16,17 @@ html, body {
     margin: 5px;
 }
 .header {
-    background: antiquewhite; /*ovo je boja onog headera, sad je ovo kao be? */
+    background: #CCCCCC; /*ovo je boja onog headera, sad je ovo kao be? */
     position: relative;
+}
+
+.cover{
+	display: block;
+	position:relative;
+	background-repeat: no-repeat;
+	height:200px;
+	background-position: center;
+	background-image:url(../media/hm.jpg);
 }
 
 .header-logo > i+i {
@@ -74,6 +83,12 @@ html, body {
     left: 0em;
     top: 2.6em;
 }
+.centar {
+  letter-spacing: -1px;
+  rgba(0,0,0,0.1);
+  padding: 20px;
+  text-align: center
+}
 
 .header-logo {
 	position: relative;
@@ -81,6 +96,7 @@ html, body {
 }
 .header-logo-cnt {
     display: inline-block;
+	float: left;
 }
 .slika {
 	
@@ -91,8 +107,8 @@ html, body {
 }
 .header-menu {
     display: inline-block;
-
-    min-height: 50px; /* ovo je visina onog headera, u zavisnostii od logoa... */
+	position: relative;
+    min-height: 10px; /* ovo je visina onog headera, u zavisnostii od logoa... */
 }
 .header-menu ul {
     position: absolute;
@@ -100,6 +116,7 @@ html, body {
 }
 .header-menu ul, .header-menu ul li {
     display: inline-block;
+    position:relative;
     text-align: center;
     padding: 0;
     margin: 0;
@@ -116,13 +133,13 @@ html, body {
 .header-menu > ul > li {
     height: 40px;
     float: left;
-    background: blueviolet; 
+    background: #6dbabc; 
     width: 140px;
     margin: 0;
     padding: 0;
 }
 .header-menu ul li:hover {
-    background: darkviolet; 
+    background: cadetblue; 
 }
 .empty {
     padding: 0;
@@ -138,6 +155,7 @@ html, body {
 
 }
 .news {
+	position: relative;
     margin: 10px 10px 15px 10px;
     padding: 5px;
     display: block;
@@ -149,18 +167,48 @@ html, body {
 }
 .news-title {
     font-weight: bold;
-    font-size: larger;
+    font-size: 24px;
+	text-align: center;
 }
 .news-img {
-    display: inline-block;
-    min-width: 40px;
-    min-height: 60px;
-    margin: 10px;
+	float:left;
+	margin: 5px 10px 5px 5px;
+    min-width: 80px;
+    min-height: 120px;
     background-image: url(../media/medo.jpg); 
-	background-size: 40px 60px;
+	background-size: 90px 120px;
     background-repeat: no-repeat;
     background-position: center;
-
+}
+.news-img2 {
+	float:right;
+	margin: 5px 10px 5px 5px;
+    min-width: 100px;
+    min-height: 120px;
+    background-image: url(../media/citati.jpg); 
+	background-size: 100px 120px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.news-img3 {
+	float:left;
+	margin: 5px 10px 5px 5px;
+    min-width: 100px;
+    min-height: 120px;
+    background-image: url(../media/indeks.jpg); 
+	background-size: 100px 120px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.news-img4{
+	float:right;
+	margin: 5px 10px 5px 5px;
+    min-width: 200px;
+    min-height: 240px;
+    background-image: url(../media/NG.jpg); 
+	background-size: 200px 240px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .news-txt {
     display: inline;
@@ -247,4 +295,11 @@ html, body {
 #tabela td {
     padding: 5px;
     border: 1px solid black;
+}
+.Proslo{
+display:none;
+}
+
+.Datum{
+
 }

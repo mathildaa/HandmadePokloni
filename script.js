@@ -8,8 +8,7 @@ function ProtekloVrijeme(datum) {
 	if (interval%10 >= 2 && interval%10 < 7 && interval<7) {return 'Novost objavljena prije ' + interval + ' dana';} 
 	if (interval >= 7 && interval < 14) {return 'Novost objavljena prije 1 sedmicu';} 
     if (interval >= 14 && interval < 21) {return 'Novost objavljena prije 2 sedmice';}
-    if (interval >= 22 && interval < 28) {return 'Novost objavljena prije 3 sedmice';}
-    if (interval > 0 && interval <= 31) {return 'Novost objavljena prije 4 sedmice';}
+    if (interval >= 22 && interval <= 31) {return 'Novost objavljena prije 3 sedmice';}
     
 	interval = Math.floor(prosloSec / 3600);
 	if (interval >= 5 && interval <= 20) {return 'Novost objavljena prije ' + interval + ' sati';}
@@ -33,20 +32,28 @@ window.onload = function () {
     var pomlabels = document.getElementsByClassName("Proslo");
     for (var i = 0; i < datelabels.length; i++) {
         var d = new Date(datelabels[i].innerHTML);
+		if (i==0) d = new Date(); //da bismo imali jedan testni za danasnje novosti
+		if (i==1) d = new Date() - 400000; //i jos jedan xD
+		if (i==2) d = new Date() - 2*86500000; //da imamo jedan testni novosti ove sedmice - hardcode ali je ok za sad
         pomlabels[i].innerHTML = datelabels[i].innerHTML;
         if(ProtekloVrijeme(d) != -1) datelabels[i].innerHTML = ProtekloVrijeme(d);
 	}
 }
 
 function timeSpan(datum) {
-    var prosloSec = Math.floor((new Date() - datum) / 1000);
-    if (prosloSec >= 2592000) { return -1; } //vise od mjesec
-	
-    var interval = Math.floor(prosloSec / 86400);
-    if (interval <= 1) {return 3;}  //danas
-	if (interval >= 2 && interval < 7) {return 2;}  //ove sedmice
-	if (interval >= 7 && interval <= 31) {return 1;} //ovog mjeseca
-
+	var danas = new Date();
+    if(danas.getFullYear() != datum.getFullYear()) return -1;
+	if(danas.getUTCMonth() != datum.getUTCMonth()) return -1;
+	if(danas.getUTCMonth() == datum.getUTCMonth()) //isti mjesec
+	{
+		if(danas.getDay() >= datum.getDay() && (danas.getUTCDate() - datum.getUTCDate()) <= 7) //ovo je ista sedmica 
+		{
+			if(danas.getUTCDate() == datum.getUTCDate()) {return 3;}
+			return 2;
+		}
+		return 1;
+	} 
+	return -1;
 }
 
 

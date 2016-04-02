@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="CSS/style.css">
-    <title>Handmade pokloni | Tabela</title>
+    <title>Handmade pokloni | Pretraga</title>
 </head>
 <body>
 <div class="page">
-        <div class="header">
+    <div class="header">
         <div class="header-menu">
             <ul>
                 <li><a class="menu-home" href="index.html">POČETNA</a></li>
@@ -24,13 +24,21 @@
 		</div>
 	</div>
     <div class="main">
-        <table id="tabela">
-            <tr><td>Ovo cemo popuniti na 2. spirali :)</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
-            <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
-            <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
-            <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
-        </table>
+		<div class="div-news">
+			<div class="news">
+				<div class="Pretraga">
+					<select id="dropdown" onchange="dropdownChanged()">
+            <option value="sve">Sve novosti</option>
+            <option value="danasnje">Danasnje novosti</option>
+            <option value="sedmicne">Novosti ove sedmice</option>
+            <option value="mjesecne">Novosti ovog mjeseca</option>
+        </select>
+				</div>
+			</div>	
+		</div>
     </div>
+	
+
 </div>
 
 </body>

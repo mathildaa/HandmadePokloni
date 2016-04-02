@@ -12,10 +12,12 @@
 		<div class="header-menu">
 		    <ul>
 			<!--<li><div class="header-logo-cnt"><i class="header-logo"><i></i><i></i><i></i><i></i></i></div></li>  -->
-			    <li><a class="menu-home" href="index.html">POČETNA</a></li>
+			    
+				<li><a class="menu-home" href="index.html">POČETNA</a></li>
                 <li><a class="menu-links" href="linkovi.html">LINKOVI</a></li>
                 <li><a class="menu-links" href="tabela.html">Tabela</a></li>
                 <li><a class="menu-contacts" href="kontakt.html">KONTAKT</a></li>
+				
             </ul>
         </div>
     </div>
@@ -25,12 +27,22 @@
 		</div>
 	</div>
 	
-	
     <div class="main">
         <div class="div-news">
+		
+		    <div class="Pretraga">
+				<select id="dropdown" onchange="dropdownChanged()">
+					<option value="sve">Sve novosti</option>
+					<option value="danasnje">Danasnje novosti</option>
+					<option value="sedmicne">Novosti ove sedmice</option>
+					<option value="mjesecne">Novosti ovog mjeseca</option>
+				</select>
+			</div>
+			
             <div class="news">
 			    <div class="news-title">Najslađi pokloni za vaše dame</div>
 				<label class="Datum">Mart 21, 2016 04:37:00</label>
+				<label class="Datum1">Mart 21, 2016 04:37:00</label>
 				<label class="Proslo"></label>
                 <div class="news-content">
                     <div class="news-img">&nbsp;</div>
@@ -47,9 +59,11 @@
                 </div>
                 <div class="empty">&nbsp;</div>
             </div>
+			
             <div class="news">
                 <div class="news-title">Love Box</div>
 				<label class="Datum">February 7, 2016 09:13:00</label>
+				<label class="Datum1">February 7, 2016 09:13:00</label>
 				<label class="Proslo"></label>
                 <div class="news-content">
                     <div class="news-img2">&nbsp;</div>
@@ -66,7 +80,8 @@
             </div>
             <div class="news">
                 <div class="news-title">Futrola za indeks</div>
-				<label class="Datum">February 6, 2016 19:30:00</label>
+				<label class="Datum">April 02, 2016 04:30:00</label>
+				<label class="Datum1">April 02, 2016 04:30:00</label>
                 <div class="news-content">
                     <div class="news-img3">&nbsp;</div>
                     <div class="news-txt">
@@ -83,6 +98,7 @@
             <div class="news">
                 <div class="news-title">Pismo od Djed Mraza</div>
 				<label class="Datum">December 21, 2015 00:13:00</label>
+				<label class="Datum1">December 21, 2015 00:13:00</label>
 				<label class="Proslo"></label>
                 <div class="news-content">
                     <div class="news-img4">&nbsp;</div>

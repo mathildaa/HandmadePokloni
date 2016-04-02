@@ -16,7 +16,7 @@ html, body {
     margin: 5px;
 }
 .header {
-    background: #CCCCCC; /*ovo je boja onog headera, sad je ovo kao be? */
+    background: cadetblue; /*ovo je boja onog headera, sad je ovo kao be? */
     position: relative;
 }
 
@@ -302,4 +302,15 @@ display:none;
 
 .Datum{
 
+}
+
+.Datum1{
+display:none;
+}
+
+.Pretraga {
+	border: 1px solid gray;
+    padding:2%;
+	margin-left: 10px;
+	margin-right: 10px;
 }

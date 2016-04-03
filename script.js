@@ -33,24 +33,29 @@ window.onload = function () {
     for (var i = 0; i < datelabels.length; i++) {
         var d = new Date(datelabels[i].innerHTML);
 		if (i==0) d = new Date(); //da bismo imali jedan testni za danasnje novosti
-		if (i==1) d = new Date() - 400000; //i jos jedan xD
-		if (i==2) d = new Date() - 2*86500000; //da imamo jedan testni novosti ove sedmice - hardcode ali je ok za sad
+		if (i==1) d = new Date(new Date() - 400000); //i jos jedan xD
+		if (i==2) d = new Date(new Date() - 2*86500000); //da imamo jedan testni novosti ove sedmice - hardcode ali je ok za sad
         pomlabels[i].innerHTML = datelabels[i].innerHTML;
         if(ProtekloVrijeme(d) != -1) datelabels[i].innerHTML = ProtekloVrijeme(d);
 	}
+	var datelabels1 = document.getElementsByClassName("Datum1"); //opet malo hardcode-a, za testiranje
+	datelabels1[0].innerHTML = new Date();
+	datelabels1[1].innerHTML = new Date(new Date() - 400000)
+	datelabels1[2].innerHTML = new Date(new Date() - 2*86500000) 
 }
 
 function timeSpan(datum) {
 	var danas = new Date();
-    if(danas.getFullYear() != datum.getFullYear()) return -1;
+	if(danas.getFullYear() != datum.getFullYear()) return -1;
 	if(danas.getUTCMonth() != datum.getUTCMonth()) return -1;
 	if(danas.getUTCMonth() == datum.getUTCMonth()) //isti mjesec
 	{
-		if(danas.getDay() >= datum.getDay() && (danas.getUTCDate() - datum.getUTCDate()) <= 7) //ovo je ista sedmica 
-		{
-			if(danas.getUTCDate() == datum.getUTCDate()) {return 3;}
+		if((danas.getDay() >= datum.getDay() || danas.getDay() == 0) && (danas.getUTCDate() - datum.getUTCDate()) <= 7) //ovo je ista sedmica 
+		{console.log(datum.getUTCDate());
+			if(danas.getUTCDate() == datum.getUTCDate()) {console.log(datum.getUTCDate()); return 3;}
 			return 2;
 		}
+		
 		return 1;
 	} 
 	return -1;

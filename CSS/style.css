@@ -171,6 +171,28 @@ html, body {
 	text-align: center;
 	color: white;
 }
+.unos-novost{
+	font-weight: bold;
+    font-size: 20px;
+	text-align: left;
+	color: white;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
+	padding-bottom : 10px;
+}
+.crveni-tekst{
+    font-size: 15px;
+	text-align: left;
+	color: red;
+}
+
+.news-img{
+	margin: 5px 10px 5px 5px;
+    max-width: 200px;
+    max-height: 200px;
+float:left;
+}
 .news-imgL {
 	float:left;
 	margin: 5px 10px 5px 5px;
@@ -220,6 +242,17 @@ html, body {
     overflow: auto;
     height: 400px;
 }
+
+#unosForma {
+    border-radius: 10px; /* ovo je zaobljenje one forme */
+    background: #3b6567;
+    width: 100%;
+    margin-left: 15px;
+    margin-right: 15px;
+    overflow: auto;
+    height: 500px;
+}
+
 #forma div#lijevo {
     float: left;
     font-weight: bold;
@@ -277,6 +310,11 @@ html, body {
 }
 .Proslo{
 display:none;
+}
+
+.crveno{
+font-weight: lighter;
+    color: #ff3399; 
 }
 
 .Datum{

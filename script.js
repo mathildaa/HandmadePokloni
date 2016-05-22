@@ -1,8 +1,7 @@
 function ProtekloVrijeme(datum) {
     var prosloSec = Math.floor((new Date() - datum) / 1000);
 	//ako je vise od mjesec ne treba nista mijenjati
-    if (prosloSec >= 2592000) { return -1; }
-	
+    if (prosloSec >= 2592000) { return 'Novost objavljena prije 4par sekundi'; }//return -1; }
     var interval = Math.floor(prosloSec / 86400);
     if (interval == 1) {return 'Novost objavljena prije 1 dan';} 
 	if (interval%10 >= 2 && interval%10 < 7 && interval<7) {return 'Novost objavljena prije ' + interval + ' dana';} 
@@ -32,16 +31,9 @@ window.onload = function () {
     var pomlabels = document.getElementsByClassName("Proslo");
     for (var i = 0; i < datelabels.length; i++) {
         var d = new Date(datelabels[i].innerHTML);
-		if (i==0) d = new Date(); //da bismo imali jedan testni za danasnje novosti
-		if (i==1) d = new Date(new Date() - 400000); //i jos jedan xD
-		if (i==2) d = new Date(new Date() - 2*86500000); //da imamo jedan testni novosti ove sedmice - hardcode ali je ok za sad
-        pomlabels[i].innerHTML = datelabels[i].innerHTML;
+		pomlabels[i].innerHTML = datelabels[i].innerHTML;
         if(ProtekloVrijeme(d) != -1) datelabels[i].innerHTML = ProtekloVrijeme(d);
 	}
-	var datelabels1 = document.getElementsByClassName("Datum1"); //opet malo hardcode-a, za testiranje
-	datelabels1[0].innerHTML = new Date();
-	datelabels1[1].innerHTML = new Date(new Date() - 400000)
-	datelabels1[2].innerHTML = new Date(new Date() - 2*86500000) 
 }
 
 function timeSpan(datum) {

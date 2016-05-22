@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="CSS/style.css">
+    <title>Handmade pokloni</title>
+</head>
+<body>
+<?php	
+		//file_put_contents("login.csv", "admin,".password_hash("admin", PASSWORD_BCRYPT));
+		$rezultat = file("login.csv");
+		$podaci = explode(",", $rezultat[0]);
+		$ime = $podaci[0];
+		$sifra = $podaci[1];
+		$text = "Neuspjesna prijava!";						
+		if (isset($_POST['prijava']) && $_POST['username'] == $ime && password_verify($_POST['password'], $sifra)){
+			session_start();
+			$_SESSION['valid'] = true;
+			$_SESSION['timeout'] = time();
+			$_SESSION['username'] = $ime;	
+			$text = "Uspješno ste prijavljeni!";		
+			header('Refresh: 1; URL = unosNovosti.php');
+		}
+	?>
+
+<div class="page">
+    <div class="header">
+		<div class="header-menu">
+		    <ul>
+			<!--<li><div class="header-logo-cnt"><i class="header-logo"><i></i><i></i><i></i><i></i></i></div></li>  -->
+			    
+				<li><a class="menu-home" href="index.html">POČETNA</a></li>
+                <li><a class="menu-links" href="linkovi.html">LINKOVI</a></li>
+                <li><a class="menu-links" href="tabela.html">Tabela</a></li>
+                <li><a class="menu-contacts" href="kontakt.html">KONTAKT</a></li>,
+				<li><a class="menu-admin" href="admin.html">ADMIN PANEL</a></li>
+				
+            </ul>
+        </div>
+    </div>
+	
+	<div class="cover">
+		<div class="center">
+		</div>
+	</div>
+	
+    <div class="main">
+        	<div class="div-news">
+				
+				<form action="admin.php" method="post">
+				<table class = "login-tabela">
+					<tbody>
+						<tr>
+							<td colspan = "2">
+								<b>Prijava</b>
+							</td>
+						</tr>
+						<tr>
+							<td>Username</td>
+							<td><input autofocus type = "text" name = "username" placeholder = "Username"></td>
+						</tr>
+						<tr>
+							<td>Password</td>
+							<td><input autofocus type = "password" name = "password" placeholder = "Password"></td>
+						</tr>
+						<tr>
+							<td>Password</td>
+							<td><input autofocus type = "password" name = "password" placeholder = "Password"></td>
+						</tr>
+						<tr>
+							<td><input id="dugme" type="submit" name="prijava" value="Prijava"></td>
+						</tr>
+					</tbody>
+					
+				</form>			
+			</div>
+    </div>
+</div>
+
+</body>
+</html>

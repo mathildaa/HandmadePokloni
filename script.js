@@ -1,4 +1,5 @@
 function ProtekloVrijeme(datum) {
+//nova verzija
     var prosloSec = Math.floor((new Date() - datum) / 1000);
 	//ako je vise od mjesec ne treba nista mijenjati
     if (prosloSec >= 2592000) { return 'Novost objavljena prije 4par sekundi'; }//return -1; }
@@ -27,6 +28,7 @@ function ProtekloVrijeme(datum) {
 }
 
 window.onload = function () {
+//ovo je prava verzija
     var datelabels = document.getElementsByClassName("Datum");
     var pomlabels = document.getElementsByClassName("Proslo");
     for (var i = 0; i < datelabels.length; i++) {

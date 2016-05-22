@@ -22,11 +22,12 @@
 			else if($_POST['slika'] == "") $porukaAdmin = "Niste odabrali sliku";
 			else if($_POST['tekst'] == "") $porukaAdmin = "Niste unijeli tekst novosti";
 			else if($_POST['telefon'] == "") $porukaAdmin = "Niste unijeli telefon";
-			//else if($_POST['telefonOK'] == "false") $porukaAdmin = "Pogresan telefon";	
+			else if($_POST['telefonOK'] == "false") $porukaAdmin = "Pogresan telefon";	
 			else
 			{	
 				date_default_timezone_set('Europe/Sarajevo');
 				$naslov = htmlEntities($_POST['naslov'], ENT_QUOTES);
+				$naslov = strtoupper($naslov);
 				$tekst = htmlEntities($_POST['tekst'], ENT_QUOTES); 
 				$tekst = str_replace(",","&#44;", $tekst);
 				$slika = htmlEntities($_POST['slika'], ENT_QUOTES);	
@@ -57,27 +58,24 @@
 			<div class="main">
 				<div class="div-news">
 					<div class="news">	
-							<form id="unosForma" method="post">					
-								<table class = "unos-novost">
-									<tbody>
-										
-										<tr> <!--namjestiti da nije skalabilno, da se ne prebrišu podaci kad se pogriješi -->
-											<td>Naslov novosti</td>
-											<td><input autofocus type = "text" size = "42" name = "naslov" onkeyup = "validiraj(this)"></td>
-										</tr>
-										<tr>
-											<td>Slika novosti</td>
-											<td><input type="file" name="slika" accept="image/*"></td>
-										</tr>
-										<tr>
-											<td>Tekst novosti</td>
-											<td><textarea name="tekst" rows="12" cols = "42" onkeyup="validiraj(this)"></textarea></td>
-										</tr>
-										<tr> 
-											<td>Odaberite zemlju<td>
-												<!--http://www.mediacollege.com/internet/samples/html/country-list.html-->
-												<select name="zemlja">
-												<option value="">Vaša zemlja...</option>
+							<form id="forma" method="post">					
+									<div id="lijevo">
+										<p>Unesite podatke</p>
+									</div>
+									<div id = "desno">
+										<div class="desno-cont">
+											<input placeholder = "Unesite naslov" autofocus type = "text" size = "42" name = "naslov" onkeyup = "validiraj(this)">
+										</div>
+										<div class="desno-cont">
+											<input type="file" name="slika" accept="image/*">
+										</div>
+										<div class="desno-cont">
+											<textarea placeholder = "Unesite tekst novosti" name="tekst" rows="12" cols = "42" onkeyup="validiraj(this)"></textarea>
+										</div>
+										<div class="desno-cont">
+											<!--http://www.mediacollege.com/internet/samples/html/country-list.html-->
+												<select name="zemlja" id = "zemlja">
+												<option value="">Odaberite zemlju...</option>
 												<option value="AF">Afghanistan</option>
 												<option value="AL">Albania</option>
 												<option value="DZ">Algeria</option>
@@ -326,25 +324,25 @@
 												<option value="ZM">Zambia</option>
 												<option value="ZW">Zimbabwe</option>
 												</select>
-										</tr>
-										<tr> 
-											<td>Broj telefona</td>
-											<td><input type = "text" size = "24" name = "telefon" onkeyup = "telefonValidacija(this)"></td>
+										</div>
+										<div class="desno-cont">
+											<input placeholder = "Unesite telefon" type = "text" size = "24" id = "telefon" name = "telefon" onkeyup = "telefonValidacija(this)">
+										</div>
+										<div class="desno-cont">
 											<input id="telefonOK" name="telefonOK" type="hidden" value="false">
-										</tr>
-										<tr>
-											<td></td>
-											<td><input id="dodaj" style="height:50px; width:100px" type="submit" name="dodaj" value="Dodaj novost"></td>
-											<td><input colspan = "4" align = "left" id="izadji" style="height:50px; width:100px" type="submit" name="izadji" value="Izadji"></td>
-											
-											</tr>
-										<tr> 
-											<td></td>
-											<td><label class="crveno"><?php echo $porukaAdmin; ?></label></td>
-											
-										</tr>
-									</tbody>
-								</table>
+											<p id="rezultat"> </p>
+										</div>
+										<div class="desno-cont">
+											<label class="crveno"><?php echo $porukaAdmin; ?></label>
+										</div>
+											<input id="dodaj" style="height:50px; width:100px" type="submit" name="dodaj" value="Dodaj novost">
+											<input id="izadji" style="height:50px; width:100px" type="submit" name="izadji" value="Izadji">
+										
+									</div>
+										
+						
+										
+									
 							</form>
 					</div>
 				</div>

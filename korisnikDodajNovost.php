@@ -9,7 +9,7 @@
 <body>
 <?php
 	session_start();
-	if(!isset($_SESSION['username']) ||  $_SESSION['username'] != "ivona") 
+	if(!isset($_SESSION['username']) ) 
 	{
 		header('Refresh: 0, URL = admin.php');
 	}

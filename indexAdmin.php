@@ -37,12 +37,12 @@
 							{
 								$jaID = $k['id'];
 							}
-							echo"<li><a class = 'menu-home' href='index.php?autor=$jaID'>MOJE NOVOSTI</a></li>";
+							echo"<li><a class = 'menu-home' href='indexAdmin.php?autor=$jaID'>MOJE NOVOSTI</a></li>";
 						}
 					?>
-					<!--notifikacije-->
+				<!--notifikacije-->
 					 <?php
-						session_start();
+						
 						if (isset($_SESSION['username'])) 
 						{
 							echo "<li><a id='notif' href='#'>+ ";
@@ -58,7 +58,6 @@
 						}
 					?>
 					<!--notifikacije-->
-				
             </ul>
         </div>
     </div>
@@ -78,7 +77,7 @@
 					<option value="sedmicne">Novosti ove sedmice</option>
 					<option value="mjesecne">Novosti ovog mjeseca</option>
 				</select>
-				<form id = "sortiraj" action = "index.php" method = "post">
+				<form action = "indexAdmin.php" method = "post">
 					<input id="sortiraj" style="height:20px; width:130px" type="submit" name="sortiraj" value="Sortiraj abecedno">
 					<input id="sortirajNormalno" style="height:20px; width:130px" type="submit" name="sortirajNormalno" value="Prikazi hronoloski">
 				
@@ -87,19 +86,75 @@
 
 
                <?php
-				//session_start();
+				session_start();
 				date_default_timezone_set('Europe/Sarajevo');
-				if(isset($_SESSION['username']) &&  $_SESSION['username'] == "ivona") 
-				{
-					header('Refresh: 0, URL = indexAdmin.php');
-				}
-					define('DB_HOST', getenv('OPENSHIFT_MYSQL_DB_HOST'));
+				define('DB_HOST', getenv('OPENSHIFT_MYSQL_DB_HOST'));
 					define('DB_PORT',getenv('OPENSHIFT_MYSQL_DB_PORT'));
 					define('DB_USER',getenv('OPENSHIFT_MYSQL_DB_USERNAME'));
 					define('DB_PASS',getenv('OPENSHIFT_MYSQL_DB_PASSWORD'));
 					define('DB_NAME',getenv('OPENSHIFT_GEAR_NAME'));
 					$dsn = 'mysql:dbname='.DB_NAME.';host='.DB_HOST.';port='.DB_PORT;
-					$vezaNaBazu = new PDO($dsn, DB_USER, DB_PASS);$vezaNaBazu -> exec("set names utf8");
+					$vezaNaBazu = new PDO($dsn, DB_USER, DB_PASS);$vezaNaBazu->exec("set names utf8");
+					if(!isset($_SESSION['username']) ||  $_SESSION['username'] != "ivona") 
+					{
+						header('Refresh: 0, URL = admin.php');
+					}
+					if(isset($_POST['obrisiKom']))
+					{
+						$komID = $_POST['idK'];
+						$komentari = $vezaNaBazu->query("select id from komentari where id = $komID");
+						if (!$komentari) {
+									  $greska = $vezaNaBazu->errorInfo();
+									  print "SQL greška: " . $greska[2];
+									  exit();
+									}
+						foreach($komentari as $k)
+						{
+							$id = $k['id'];
+							$podkomentari = $vezaNaBazu->exec("delete from komentari where naKomentar = $id");
+						}
+						$novosti3 = $vezaNaBazu->exec("delete from komentari where id = $komID");
+					}
+					
+					if(isset($_POST['obrisiPKom']))
+					{
+						$komID = $_POST['idPK'];
+						$podkomentari = $vezaNaBazu->exec("delete from komentari where id = $komID");
+					}
+					
+					
+					if(isset($_POST['obrisiNov']))
+					{
+						$novostID = $_POST['id'];
+						$novosti2 = $vezaNaBazu->exec("delete from novost where id = $novostID");
+						$komentari = $vezaNaBazu->query("select id from komentari where novost = $novostID");
+						if (!$komentari) {
+									  $greska = $vezaNaBazu->errorInfo();
+									  print "SQL greška: " . $greska[2];
+									  exit();
+									}
+						foreach($komentari as $k)
+						{
+							$id = $k['id'];
+							$podkomentari = $vezaNaBazu->exec("delete from komentari where naKomentar = $id");
+						}
+						$novosti3 = $vezaNaBazu->exec("delete from komentari where novost = $novostID");
+					}
+					
+					if(isset($_POST['koment']))
+					{
+						$novostID = $_POST['id'];
+						$novost = $vezaNaBazu->query("select komentar from novost where id = $novostID");
+						
+						$dozvoljeni = 0;
+						foreach($novost as $n)
+						{
+							$dozvoljeni = $n['komentar'];
+						}
+						if($dozvoljeni) $update = $vezaNaBazu->query("update novost set komentar = 0 where id = $novostID");
+						else $update = $vezaNaBazu->query("update novost set komentar = 1 where id = $novostID");
+					}
+					
 					$novosti = $vezaNaBazu->query("select id, naslov, tekst, autor, UNIX_TIMESTAMP(datum) datum, komentar,slika from novost");
 					if(isset($_POST['dodajKom']))
 					{
@@ -178,36 +233,22 @@
 						}
 					}
 					
-					if (!$novosti) {
-					  $greska = $vezaNaBazu->errorInfo();
-					  print "SQL greška: " . $greska[2];
-					  exit();
-					}
-
 					if (isset($_POST['sortiraj']))
 						$novosti = $vezaNaBazu->query("select  id, naslov, tekst, autor, UNIX_TIMESTAMP(datum) datum, komentar, slika from novost order by naslov asc");
 					if (isset($_POST['sortirajNormalno']))
 						$novosti = $vezaNaBazu->query("select  id, naslov, tekst, autor, UNIX_TIMESTAMP(datum) datum, komentar, slika from novost order by datum desc");
 					$brojac = 1;
-					if (!$novosti) {
-					  $greska = $vezaNaBazu->errorInfo();
-					  print "SQL greška: " . $greska[2];
-					  exit();
-					}
+					
 					if(isset($_GET['autor']))
 					{
 						if($_GET['autor'] == 0) {}
 						else{
 							$a = $_GET['autor'];
 							$novosti = $vezaNaBazu->query("select  id, naslov, tekst, autor, UNIX_TIMESTAMP(datum) datum, komentar, slika from novost where autor = '$a' order by datum desc");
-							if (!$novosti) {
-								  $greska = $vezaNaBazu->errorInfo();
-								  print "SQL greška: " . $greska[2];
-								  exit();
-							}
+							
 						}
 					}
-
+					
 					foreach ($novosti as $n)
 					{
 						$src = "media/".($n['slika']);
@@ -217,6 +258,7 @@
 						$tekst = $n['tekst'];
 						$autor = $n['autor'];
 						$id = $n['id'];
+						
 						$brNeprocitanih = 0;
 						$neprocitani = $vezaNaBazu->query("select count(*) from komentari where novost = $id and procitan = 0");
 						foreach($neprocitani as $k)
@@ -237,8 +279,7 @@
 						if(isset($_GET['autor'])){$autorhref = $autor;}
 						if($_GET['autor'] == 0){$autorhref = 0;}
 						foreach($autori as $a) $ispisautor = $a['username'];
-						if($ispisautor != $_SESSION['username']) {$brNeprocitanih = 0;}
-						print "<div class='news'>				
+						print "<form method='post'><div class='news'>				
 									<div class = 'news-title'>$naslov</div>
 									<label class = 'Datum'>$datum</label>
 									<label class = 'Proslo'></label>
@@ -248,13 +289,15 @@
 										<img class = 'news-imgL' src=$src alt=$alt>
 										<div class = 'news-txt'> $tekst </div>
 										<br>
-										<a class = 'Autor' href='index.php?autor=$autor'>Objavio $ispisautor</a>
+										<input type='hidden' name='id' value='$id'> 
+										<a class = 'Autor' href='indexAdmin.php?autor=$autor'>Objavio $ispisautor</a>
 										<br>
-										<a class = 'Autor' href='index.php?novost=$id&autor=$autorhref'>Detaljno...($brNeprocitanih)</a>
-										</div>
+										<a class = 'Autor' href='indexAdmin.php?novost=$id&autor=$autorhref'>Detaljno...($brNeprocitanih)</a>
+										<input class='obrisiNov' type='submit' name='obrisiNov' value='Obrisi novost'>
+										<input class='koment' type='submit' name='koment' style='width:120px' value='Dozvoli/Zabrani komentare'>
+									</div>
 									<div class='empty'></div>
-								</div>";
-						$brojac++;
+								</div></form>";
 						if(isset($_GET['novost'])  && $_GET['novost'] == $id)
 						{
 							if($kom){
@@ -268,6 +311,7 @@
 							{
 								$autor = $k['autor'];
 								$autorIme;
+								$idK = $k['id'];
 									if($autor == 0) $autorIme = "gost";
 									else
 									{
@@ -277,29 +321,28 @@
 											$autorIme = $a['username'];
 										}
 									}
-								print "<div class='komentariSlika'>
+								print "<form method='post'>
+										<div class='komentariSlika'>
 										<div class='komentari'>		
 											<div class = 'news-txt'>
 												<p>".$k['sadrzaj']."</p><BR>
-												<a class = 'Autor' href='index.php?autor=$autor'>by: $autorIme</a>
+												<a class = 'Autor' href='indexAdmin.php?autor=$autor'>by: $autorIme</a>
+												<input class='obrisiKom' type='submit' name='obrisiKom' value='Obrisi komentar'>
+												<input type='hidden' name='idK' value='$idK'> 
 											</div>
 										</div>
-									</div>";
+									</div></form>";
 								$idKomentara = $k['id'];	
-								$komNaKom = $vezaNaBazu->query("select sadrzaj, autor from komentari where naKomentar = '$idKomentara'");
+								$komNaKom = $vezaNaBazu->query("select id, sadrzaj, autor from komentari where naKomentar = '$idKomentara'");
 								if(isset($_SESSION['username']) && $_SESSION['username'] == $ispisautor) //notifikacije
 								{
 									$procitaniPodKom = $vezaNaBazu->query("update komentari set procitan = 1 where naKomentar = '$idKomentara'");
-								}
-								if (!$komNaKom) {
-								  $greska = $vezaNaBazu->errorInfo();
-								  print "SQL greška: " . $greska[2];
-								  exit();
 								}
 								foreach($komNaKom as $k)
 								{
 									$autor = $k['autor'];
 									$autorIme;
+									$idPK = $k['id'];
 									if($autor == 0) $autorIme = "gost";
 									else
 									{
@@ -309,33 +352,35 @@
 											$autorIme = $a['username'];
 										}
 									}
-									print "<div class='PodkomentariSlika'>
+									print "<form method='post'><div class='PodkomentariSlika'>
 										<div class='komentari'>		
 											<div class = 'news-txt'>
 												<p>".$k['sadrzaj']."</p>
-												<a class = 'Autor' href='index.php?autor=$autor'>by: $autorIme</a>
+												<a class = 'Autor' href='indexAdmin.php?autor=$autor'>by: $autorIme</a>
+												<input class='obrisiPKom' type='submit' name='obrisiPKom' value='Obrisi komentar'>
+												<input type='hidden' name='idPK' value='$idPK'> 
 											</div>
 										</div>
-									</div>";	
+									</div></form>";	
 								}
-								print "<form action='index.php?novost=$id' method='post'>
+								print "<form action='indexAdmin.php?novost=$id' method='post'>
 									<div class='PodkomentariSlika'>
 									
 									<textarea placeholder = 'Odgovorite na ovaj komentar' name='podkomentar' rows='2' cols = '87'></textarea>
 									<input class='dodajPKom' type='submit' name='dodajPKom' value='Pošalji'>
 									<input type='hidden' name='idkom' value='$idKomentara'> 
-									</form>
-									</div>";
+									
+									</div></form>";
 							}
-							print "<form action='index.php?novost=$id' method='post'>
+							print "<form action='indexAdmin.php?novost=$id' method='post'>
 									<div class='komentariSlika'>
 									
 									<textarea placeholder = 'Dodajte novi komentar' name='tekstKomentara' rows='5' cols = '80'></textarea>
 									<input class='dodajKom' type='submit' name='dodajKom' value='Pošalji'>
 									
-									</form>
-									</div>";
-							}
+									
+									</div></form>";
+									}
 							else print "<div class='PodkomentariSlika'>
 										<div class='komentari'>		
 											<div class = 'news-txt'>
@@ -344,7 +389,7 @@
 										</div>
 									</div>";	
 						}	
-					} //<input class='tekstKomentara' type='text' name='tekstKomentara' placeholder='Unesite odgovor ovdje...'>
+					} 
 				?>	
         </div>
     </div>

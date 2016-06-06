@@ -85,7 +85,7 @@ html, body {
 }
 .centar {
   letter-spacing: -1px;
-  rgba(0,0,0,0.1);
+
   padding: 20px;
   text-align: center
 }
@@ -162,6 +162,29 @@ html, body {
     background: #6dbabc; 
 
 }
+.komentari {
+	position: relative;
+    margin: 5px 5px 5px 5px;
+    padding: 5px;
+    display: block;
+    background: #6dbabc; 
+
+}
+
+.komentariSlika {
+	position: relative;
+    margin: 0px 40px 0px 40px;
+    padding: 5px;
+    display: block;
+    background-image:url(../media/komentari.jpg);
+}
+.PodkomentariSlika {
+	position: relative;
+    margin: 0px 0px 0px 60px;
+    padding: 5px;
+    display: block;
+}
+
 .news-content {
     float: left; 
 }
@@ -322,6 +345,13 @@ font-weight: lighter;
 	font-size: small;
 	color: gray;
 }
+
+.Autor{
+	font-style: italic;
+	font-size: small;
+	color: gray;
+}
+
 
 .Datum1{
 	display: none;

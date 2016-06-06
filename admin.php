@@ -8,22 +8,49 @@
 <body>
 <?php	//ovo je prava verzija
 		//file_put_contents("loginFile.csv", "ivona,".password_hash("ivona", PASSWORD_BCRYPT));
-		require_once('password.php');
-		$loginPodaci = file("loginFile.csv");
-		$podaci = explode(",", $loginPodaci[0]);
-		$ime = $podaci[0];
-		$sifra = $podaci[1];
-		$poruka = "";						
-		if (isset($_POST['prijava']) && $_POST['username'] == $ime && password_verify($_POST['password'], $sifra)){
+		$poruka = "";
+		require_once('password.php');					
+		if (isset($_POST['prijava'])){
+			$user = $_POST['username'];
+			$pw = $_POST['password'];
+			define('DB_HOST', getenv('OPENSHIFT_MYSQL_DB_HOST'));
+					define('DB_PORT',getenv('OPENSHIFT_MYSQL_DB_PORT'));
+					define('DB_USER',getenv('OPENSHIFT_MYSQL_DB_USERNAME'));
+					define('DB_PASS',getenv('OPENSHIFT_MYSQL_DB_PASSWORD'));
+					define('DB_NAME',getenv('OPENSHIFT_GEAR_NAME'));
+					$dsn = 'mysql:dbname='.DB_NAME.';host='.DB_HOST.';port='.DB_PORT;
+					$vezaNaBazu = new PDO($dsn, DB_USER, DB_PASS);$vezaNaBazu -> exec("set names utf8");
+			$logovani = $vezaNaBazu->query("select username, password from autori");
+			$uspjesno = false;
+			foreach($logovani as $l)
+			{
+				if(password_verify($pw, $l['password']) && $l['username'] == 'ivona') 
+				{
 				session_start();
-			$_SESSION['valid'] = true;
-			$_SESSION['timeout'] = time();
-			$_SESSION['username'] = $ime;	
-			$poruka = "Uspješno ste prijavljeni učitavam admin panel...";		
-			header('Refresh: 1; URL = adminPanel.php');
+					$uspjesno = true; 
+					$_SESSION['username'] = 'ivona';
+				}
+				if(password_verify($pw, $l['password']) && $l['username'] != 'ivona') 
+				{
+				session_start();
+					$uspjesno = true; 
+					$_SESSION['username'] = $l['username'];
+				}
+			}
+			if ($uspjesno && $_SESSION['username'] == "ivona") 
+			{
+				$poruka = "Uspješno ste prijavljeni učitavam admin panel...";		
+				header('Refresh: 1; URL = adminPocetna.php');
+			}
+			else if ($uspjesno) 
+			{
+				$poruka = "Uspješno ste prijavljeni učitavam korisnički panel...";		
+				header('Refresh: 1; URL = korisnickiPanel.php');
+			}
+			else
+		$poruka = "Neuspjesna prijava!";
 		}
-		else if(isset($_POST['prijava']) && ($_POST['username'] != $ime || !password_verify($_POST['password'], $sifra)))
-		 $poruka = "Neuspjesna prijava!";
+
 	?>
 
 	<div class="page">
@@ -36,7 +63,7 @@
 					<li><a class="menu-links" href="linkovi.html">LINKOVI</a></li>
 					<li><a class="menu-links" href="tabela.html">Tabela</a></li>
 					<li><a class="menu-contacts" href="kontakt.html">KONTAKT</a></li>
-					<li><a class="menu-admin" href="adminPanel.php">ADMIN PANEL</a></li>
+					<li><a class="menu-admin" href="preusmjeravanje.php">LOGIN/LOGOUT</a></li>
 					
 				</ul>
 			</div>
@@ -81,4 +108,3 @@
 	</div>
 
 </body>
-</html>
